@@ -2,7 +2,7 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import AppBar from '../components/index/AppBar';
 import Grid from '@material-ui/core/Grid';
-import { Divider } from '@material-ui/core';
+import Link from 'next/link'
 import Button from '@material-ui/core/Button';
 
 
@@ -52,7 +52,7 @@ export default function Home() {
           <Grid item xs={12} md={4}  >
             <div className={styles.paper2} >
               <h1>Veja um exemplo</h1>
-              <Button variant="contained">Professora Anne</Button>
+              <Link href={'/anne'}><Button variant="contained">Professora Anne</Button></Link>
             </div>
           </Grid>
           <Grid item xs ></Grid>
