@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-//import NavbarTB from '../../../components/tiabell/NavbarTB'
+import NavbarTB from '../../components/teacher/NavBarTB'
 import { makeStyles } from '@material-ui/core/styles'
 
 import List from '@material-ui/core/List'
@@ -8,7 +8,6 @@ import CardAula from '../../components/turma/CardAula'
 import turmas from '../../shared/anne_obj'
 import Head from 'next/head'
 
-//<NavbarTB />
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -30,7 +29,7 @@ export default function Turma() {
         <title>Professora Anne</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
+      <NavbarTB />
       
       {dados && 
         (<List dense={true} className={classes.root}>

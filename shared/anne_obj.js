@@ -7,7 +7,7 @@ const turmas = [
         aulas: [
             {
                 id: 1,
-                title: 'Aula 1',
+                title: 'Aula 1', 
                 date: '08 de março de 2021',
                 file: '/annefiles/aulas/6ano/08.03.21_6ano.pdf',
                 drive: 'https://drive.google.com/file/d/1UpWAAyqFjNImD9m7vL_LCfmahHn2t0LZ/view'

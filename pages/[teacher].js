@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import NavbarTB from '../components/index/AppBar'
 import CardsTB from '../components/teacher/CardsTB'
 import BookSection from '../components/teacher/BookSection'
+import NavbarTB from '../components/teacher/NavBarTB'
 
 import { makeStyles } from '@material-ui/core/styles';
 
