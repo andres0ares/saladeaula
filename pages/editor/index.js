@@ -45,9 +45,24 @@ export default function editor() {
         }
     }
 
-    const handleNewAula = (newAula) => {
+    const handleNewAula = async (newAula) => {
         console.log(newAula)
-        handleEdAulas()
+        // handleEdAulas()
+
+        const res = await fetch(
+            'http://localhost/3000/api/aulas',
+            {
+              body: JSON.stringify(newAula),
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              method: 'POST'
+            }
+          )
+      
+          const result = await res.json()
+          // result.user => 'Ada Lovelace'
+
     }
 
     const [dados, setDados ] = useState([{}])
@@ -61,11 +76,7 @@ export default function editor() {
         setTurma(newTurma)
     }
 
-    const [age, setAge] = useState('');
-
-    const handleChange = (event) => {
-      setAge(event.target.value);
-    };
+    
     
 
     return (
