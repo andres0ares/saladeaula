@@ -1,4 +1,4 @@
-import connect from '../../shared/database'
+import connect from '../../utils/database'
 
 export default async (req, res)  => {
 
