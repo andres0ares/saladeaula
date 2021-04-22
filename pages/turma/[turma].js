@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import CardAula from '../../components/turma/CardAula'
 
-import turmas from '../../utils/anne_obj'
+import base_URL from '../../utils/variables'
 import Head from 'next/head'
 
 
@@ -15,13 +15,12 @@ const useStyle = makeStyles((theme) => ({
   }
 }))
 
-export default function Turma() {
+export default function Turma({ dados }) {
 
   const classes = useStyle()
   const router = useRouter()
 
   const { turma } = router.query
-  const dados = turmas.find(({ key }) => key === turma);
 
   return (
      <>
@@ -31,9 +30,9 @@ export default function Turma() {
       </Head>
       <NavbarTB />
       
-      {dados && 
+      {dados.length > 0 && 
         (<List dense={true} className={classes.root}>
-          {dados.aulas.map((aula, index) => (
+          {dados.map((aula, index) => (
             <CardAula key={index} aula={aula} />
           ))}
          </List>)
@@ -44,4 +43,14 @@ export default function Turma() {
       
     </>
   )
+}
+
+Turma.getInitialProps = async (ctx) => {
+
+  const { query } = ctx
+  const { turma } = query
+
+  const response = await fetch(base_URL + `/api/aulas/${turma}`)
+    const turmass = await response.json()
+    return { dados: turmass.data }
 }

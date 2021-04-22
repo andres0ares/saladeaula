@@ -7,7 +7,9 @@ import IconButton from '@material-ui/core/IconButton';
 import LinkIcon from '@material-ui/icons/Link';
 import ClassIcon from '@material-ui/icons/Class';
 import GetAppIcon from '@material-ui/icons/GetApp';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Link from 'next/link'
+
 
 export default function CardAula(props) {
 
@@ -39,6 +41,11 @@ export default function CardAula(props) {
                     <IconButton edge="end" aria-label="Link" onClick={handleClick}>
                         <LinkIcon  />
                     </IconButton>
+                    {(props.del) && (<>
+                        <IconButton edge="end" aria-label="Link" onClick={() => props.delFunction(aula._id)}>
+                            <DeleteIcon  />
+                        </IconButton>
+                    </>)}
                 </ListItemSecondaryAction>
                 
                 

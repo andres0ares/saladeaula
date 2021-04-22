@@ -4,24 +4,26 @@ import NavBar from '../../components/index/AppBar'
 import styles from '../../styles/Editor.module.css'
 import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import turmas from '../../utils/anne_obj'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import List from '@material-ui/core/List'
 
+import base_URL from '../../utils/variables'
 import AulasForm from '../../components/editor/AulasForm'
 import CardAula from '../../components/turma/CardAula'
+
 const useStyles = makeStyles((theme) => ({
     root: {},
     formItem: {
         width: '90%',
         margin: '5px 5% 5px 5%'
     }
-}))
+}))  
 
-export default function editor() {
+export default function Editor({turmas}) {
+
 
     const classes = useStyles()
 
@@ -46,11 +48,13 @@ export default function editor() {
     }
 
     const handleNewAula = async (newAula) => {
-        console.log(newAula)
-        // handleEdAulas()
+        
+        handleEdAulas()
+
+        const url = `/api/aulas/${turma}`
 
         const res = await fetch(
-            'http://localhost/3000/api/aulas',
+            url,
             {
               body: JSON.stringify(newAula),
               headers: {
@@ -58,10 +62,31 @@ export default function editor() {
               },
               method: 'POST'
             }
-          )
-      
-          const result = await res.json()
-          // result.user => 'Ada Lovelace'
+        )
+            
+        const result = await res.json()
+        if(result.success)
+            setDados(result.data)
+    }
+
+    const handleDelete = async (id) => {
+
+        const url = `/api/aulas/${turma}`
+
+        const res = await fetch(
+            url,
+            {
+              body: JSON.stringify({_id: id}),
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              method: 'DELETE'
+            }
+        )
+            
+        const result = await res.json()
+        if(result.success)
+            setDados(result.data)
 
     }
 
@@ -70,9 +95,8 @@ export default function editor() {
 
     const handleTurma = (event) => {
         const newTurma = event.target.value
-        console.log(event.target)
         const newDados = turmas.find(({ key }) => key === newTurma)
-        setDados(newDados)
+        setDados(newDados.aulas)
         setTurma(newTurma)
     }
 
@@ -108,13 +132,13 @@ export default function editor() {
                     
                 </div> 
             </>)}
-            { turma !== '' && (
+            { turma !== '' && dados && (
                 <>
                     <AulasForm send={handleNewAula} />
                     <div className={classes.formItem} >
                         <List dense={true} className={classes.root}>
-                            {dados.aulas.map((aula, index) => (
-                                <CardAula key={index} aula={aula} />
+                            {dados.map((aula, index) => (
+                                <CardAula key={index} aula={aula} del={true} delFunction={handleDelete}/>
                             ))}
                         </List>
                     </div>
@@ -123,6 +147,12 @@ export default function editor() {
             )}
         </>
     )
+}
+
+Editor.getInitialProps = async () => {
+    const response = await fetch(base_URL + '/api/turmas')
+    const turmass = await response.json()
+    return { turmas: turmass.data }
 }
 
 // 
