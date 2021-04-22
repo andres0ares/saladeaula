@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import CardAula from '../../components/turma/CardAula'
 
-import turmas from '../../shared/anne_obj'
+import turmas from '../../utils/anne_obj'
 import Head from 'next/head'
 
 

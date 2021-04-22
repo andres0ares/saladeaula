@@ -2,7 +2,7 @@ const turmas = [
     {
         title: '6º ANO',
         subheader: 'EMEF José Ribeiro de Morais',
-        link: '/anne/turma/6ano',
+        link: '/turma/anne_6ano',
         key: 'anne_6ano',
         aulas: [
             {
@@ -39,7 +39,7 @@ const turmas = [
     {
         title: '7º ANO A e B',
         subheader: 'EMEF José Ribeiro de Morais',
-        link: '/anne/turma/7ano',
+        link: '/turma/anne_7ano',
         key: 'anne_7ano',
         aulas: [
             {
@@ -75,7 +75,7 @@ const turmas = [
     {
         title: '8º ANO',
         subheader: 'EMEF José Ribeiro de Morais',
-        link: '/anne/turma/8ano',
+        link: '/turma/anne_8ano',
         key: 'anne_8ano',
         aulas: [
             {
@@ -111,7 +111,7 @@ const turmas = [
     {
         title: '9º ANO',
         subheader: 'EMEF José Ribeiro de Morais',
-        link: '/anne/turma/9ano',
+        link: '/turma/anne_9ano',
         key: 'anne_9ano',
         aulas: [
             {

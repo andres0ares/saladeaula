@@ -3,10 +3,27 @@ import ButtonGroup from '@material-ui/core/ButtonGroup'
 import NavBar from '../../components/index/AppBar'
 import styles from '../../styles/Editor.module.css'
 import { useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import turmas from '../../utils/anne_obj'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import List from '@material-ui/core/List'
 
 import AulasForm from '../../components/editor/AulasForm'
+import CardAula from '../../components/turma/CardAula'
+const useStyles = makeStyles((theme) => ({
+    root: {},
+    formItem: {
+        width: '90%',
+        margin: '5px 5% 5px 5%'
+    }
+}))
 
 export default function editor() {
+
+    const classes = useStyles()
 
     const [ edTurmas, setEdTurmas ] = useState(false)
     const [ edAulas, setEdAulas ] = useState(false)
@@ -33,6 +50,24 @@ export default function editor() {
         handleEdAulas()
     }
 
+    const [dados, setDados ] = useState([{}])
+    const [turma, setTurma ] = useState('')
+
+    const handleTurma = (event) => {
+        const newTurma = event.target.value
+        console.log(event.target)
+        const newDados = turmas.find(({ key }) => key === newTurma)
+        setDados(newDados)
+        setTurma(newTurma)
+    }
+
+    const [age, setAge] = useState('');
+
+    const handleChange = (event) => {
+      setAge(event.target.value);
+    };
+    
+
     return (
         <>
             <NavBar />
@@ -42,7 +77,41 @@ export default function editor() {
                 <Button>***</Button>
             </ButtonGroup>
             { edTurmas && (<p>Hello World</p>)}
-            { edAulas && (<AulasForm send={handleNewAula} />)}
+            { edAulas && (<>
+                <div>
+                    <FormControl className={classes.formItem} >
+                    <InputLabel id="turma-select-label">Selecione Turma</InputLabel>
+                    <Select
+                    
+                    labelId="turma-select-label"
+                    id="turma-select"
+                    value={turma}
+                    onChange={handleTurma}
+                    >
+                        {turmas.map((option, index) => (
+                            <MenuItem key={index} value={option.key}>{option.title}</MenuItem>
+                        ))}
+    
+                    </Select>
+                    </FormControl>
+                    
+                </div> 
+            </>)}
+            { turma !== '' && (
+                <>
+                    <AulasForm send={handleNewAula} />
+                    <div className={classes.formItem} >
+                        <List dense={true} className={classes.root}>
+                            {dados.aulas.map((aula, index) => (
+                                <CardAula key={index} aula={aula} />
+                            ))}
+                        </List>
+                    </div>
+                    
+                </>
+            )}
         </>
     )
 }
+
+// 

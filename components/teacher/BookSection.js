@@ -11,7 +11,7 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 
-import livros from '../../shared/books_obj'
+import livros from '../../utils/books_obj'
 
 const useStyle = makeStyles((theme) => ({
     root: {
