@@ -35,14 +35,11 @@ export default async (req, res) => {
             }
             break
         case 'DELETE':
-            console.log('delete operation')
-            console.log(req.body._id)
             try {
                 const newValue = await Turma.findOne({ key: {$eq : turma}})
                 const index = newValue.aulas.findIndex((element) => element._id == req.body._id)
                 if (index > -1) {
                     newValue.aulas.splice(index, 1)
-                    console.log(newValue)
 
                     await Turma.updateOne({ key: {$eq : turma}}, newValue)
                     const data = await Turma.findOne({ key: {$eq : turma}})

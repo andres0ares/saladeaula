@@ -49,8 +49,6 @@ export default function Editor({turmas}) {
 
     const handleNewAula = async (newAula) => {
         
-        handleEdAulas()
-
         const url = `/api/aulas/${turma}`
 
         const res = await fetch(
@@ -65,8 +63,10 @@ export default function Editor({turmas}) {
         )
             
         const result = await res.json()
-        if(result.success)
+        if(result.success) {
             setDados(result.data)
+        }
+            
     }
 
     const handleDelete = async (id) => {
@@ -106,11 +106,13 @@ export default function Editor({turmas}) {
     return (
         <>
             <NavBar />
-            <ButtonGroup className={styles.painel} variant="contained" color="primary" aria-label="contained primary button group">
-                <Button onClick={handleEdTurmas}>Editar Turma</Button>
-                <Button onClick={handleEdAulas}>Editar Aulas </Button>
-                <Button>***</Button>
-            </ButtonGroup>
+            <div className={classes.formItem}>
+                <ButtonGroup className={styles.painel} variant="contained" color="primary" aria-label="contained primary button group">
+                    <Button onClick={handleEdTurmas}>Editar Turma</Button>
+                    <Button onClick={handleEdAulas}>Editar Aulas </Button>
+                    <Button>***</Button>
+                </ButtonGroup>
+            </div>
             { edTurmas && (<p>Hello World</p>)}
             { edAulas && (<>
                 <div>

@@ -19,8 +19,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-// var options = { year: 'numeric', month: 'long', day: 'numeric' }
-// .toLocaleDateString('pt-BR', options)
 
 export default function AulasForm(props) {
 
@@ -31,12 +29,14 @@ export default function AulasForm(props) {
     
     const newDate = new Date()
 
-    const [newAula, setNewAula] = useState({
+    const opt = {
         title: '',
         drive: '',
         file: '',
         date: newDate
-    })
+    }
+
+    const [newAula, setNewAula] = useState(opt)
 
     const handleDateChange = (date) => {
         const params = {target: {name: 'date', value: date}}
@@ -81,7 +81,10 @@ export default function AulasForm(props) {
             }))
         }
         
-        if(valid) props.send(newAula)   
+        if(valid) {
+            props.send(newAula)   
+            setNewAula(opt)
+        }
              
     }
 

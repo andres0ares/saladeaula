@@ -10,7 +10,8 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Link from 'next/link'
 
-
+// 
+// 
 export default function CardAula(props) {
 
     const aula = props.aula
@@ -18,6 +19,9 @@ export default function CardAula(props) {
     const handleClick = () => {
         window.open(aula.drive)
     }
+
+    var options = { year: 'numeric', month: 'long', day: 'numeric' }
+    const date = new Date(aula.date).toLocaleDateString('pt-BR', options)
 
     return (
         <>     
@@ -29,7 +33,7 @@ export default function CardAula(props) {
                 </ListItemAvatar>
                 <ListItemText
                 primary={aula.title}
-                secondary={aula.date}
+                secondary={date}
                 />
                 
                 <ListItemSecondaryAction>
