@@ -21,6 +21,7 @@ export default function Turma({ dados }) {
   const router = useRouter()
 
   const { turma } = router.query
+  const aulas = dados[0].aulas
 
   return (
      <>
@@ -30,9 +31,9 @@ export default function Turma({ dados }) {
       </Head>
       <NavbarTB />
       
-      {dados.length > 0 && 
+      {aulas.length > 0 && 
         (<List dense={true} className={classes.root}>
-          {dados.map((aula, index) => (
+          {aulas.map((aula, index) => (
             <CardAula key={index} aula={aula} />
           ))}
          </List>)
@@ -50,7 +51,7 @@ Turma.getInitialProps = async (ctx) => {
   const { query } = ctx
   const { turma } = query
 
-  const response = await fetch(base_URL + `/api/aulas/${turma}`)
+    const response = await fetch(base_URL + `/api/turma/${turma}`)
     const turmass = await response.json()
     return { dados: turmass.data }
 }

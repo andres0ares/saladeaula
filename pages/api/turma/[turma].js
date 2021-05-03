@@ -7,7 +7,6 @@ export default async (req, res) => {
 
     const { turma } = req.query
     const { method } = req
-    console.log(turma)
 
     switch(method){
         case 'GET':

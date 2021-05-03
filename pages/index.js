@@ -4,6 +4,7 @@ import AppBar from '../components/index/AppBar';
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link'
 import Button from '@material-ui/core/Button';
+import { useUser } from '@auth0/nextjs-auth0';
 
 
 export default function Home() {
@@ -14,6 +15,8 @@ export default function Home() {
     { name: 'Mongodb', img: '/mongodb.svg'},
     { name: 'JavaScript', img: '/js.svg'}, 
   ]
+
+  const { user, error, isLoading } = useUser()
 
   return (
     <>
@@ -47,6 +50,10 @@ export default function Home() {
           <Grid item xs={12} md={6} > 
             <div className={styles.paper1}>
               <h1>(*.*)</h1>
+              { user && <>
+                <p>{user.name}</p>
+                <p>{user.email}</p>
+              </>}
             </div>
           </Grid>
           <Grid item xs={12} md={4}  >

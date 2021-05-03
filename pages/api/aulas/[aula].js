@@ -1,13 +1,17 @@
 import Turma from '../../../models/Turma'
 import dbConnect from '../../../utils/dbConnect'
+import { withApiAuthRequired, useUser , getAccessToken } from '@auth0/nextjs-auth0'
 
 dbConnect()
 
-export default async (req, res) => {
+export default withApiAuthRequired( async (req, res) => {
 
     const { aula } = req.query
     const { method } = req
     const turma = aula
+
+    const { user, error, isLoading } = useUser()
+    console.log(user.email);
 
     switch(method){
         case 'GET':
@@ -57,5 +61,5 @@ export default async (req, res) => {
             res.status(400).json({success: false})
             break
     }
-}
+})
   
