@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import CardAula from '../../components/turma/CardAula'
 
-const { BASE_URL } = process.env
+import BASE_URL from '../../utils/baseurl'
 import Head from 'next/head'
 
 
@@ -51,7 +51,7 @@ Turma.getInitialProps = async (ctx) => {
   const { query } = ctx
   const { turma } = query
 
-    const response = await fetch(BASE_URL + `/api/turma/${turma}`)
+    const response = await fetch(`${BASE_URL}/api/turma/${turma}`)
     const turmass = await response.json()
     return { dados: turmass.data }
 }

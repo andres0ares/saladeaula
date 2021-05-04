@@ -6,7 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import { useUser } from '@auth0/nextjs-auth0'
-const { BASE_URL } = process.env
+import BASE_URL from '../../utils/baseurl'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +40,7 @@ export default function ButtonAppBar() {
           </Typography>
           {user && <>
               <Link href={'/api/auth/logout'}><Button color="inherit">Sair</Button></Link>
-              <Link href={editor}><Button color="inherit">Editor</Button></Link>
+              <a href={editor}><Button color="inherit">Editor</Button></a>
             </>
           }    
           {!user && !isLoading && 
