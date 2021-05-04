@@ -15,6 +15,8 @@ import base_URL from '../../utils/variables'
 import AulasForm from '../../components/editor/AulasForm'
 import CardAula from '../../components/turma/CardAula'
 
+const { BASE_URL } = process.env
+
 const useStyles = makeStyles((theme) => ({
     root: {},
     formItem: {

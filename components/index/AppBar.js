@@ -5,7 +5,8 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-import { useUser } from '@auth0/nextjs-auth0';
+import { useUser } from '@auth0/nextjs-auth0'
+const { BASE_URL } = process.env
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +29,7 @@ export default function ButtonAppBar() {
   const { user, error, isLoading } = useUser();
 
   const classes = useStyles();
+  const editor = `${BASE_URL}/editor`
 
   return (
     <div className={classes.root}>
@@ -38,7 +40,7 @@ export default function ButtonAppBar() {
           </Typography>
           {user && <>
               <Link href={'/api/auth/logout'}><Button color="inherit">Sair</Button></Link>
-              <Link href={'/editor'}><Button color="inherit">Editor</Button></Link>
+              <Link href={editor}><Button color="inherit">Editor</Button></Link>
             </>
           }    
           {!user && !isLoading && 

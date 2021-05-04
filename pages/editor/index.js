@@ -9,11 +9,11 @@ import MenuItem from '@material-ui/core/MenuItem'
 import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
 import List from '@material-ui/core/List'
-import { useUser, withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
-
-import base_URL from '../../utils/variables'
+import { useUser, withPageAuthRequired, getSession } from '@auth0/nextjs-auth0'
 import AulasForm from '../../components/editor/AulasForm'
 import CardAula from '../../components/turma/CardAula'
+
+const { BASE_URL } = process.env
 
 const useStyles = makeStyles((theme) => ({
     root: {},
@@ -165,7 +165,7 @@ Editor.getInitialProps = async (context) => {
 
     if(session){
         if(session.user.email == 'andreiarley@gmail.com') {
-            const response = await fetch(base_URL + '/api/turmas')
+            const response = await fetch(BASE_URL + '/api/turmas')
             const turmass = await response.json()
             return { turmas: turmass.data }
         }
