@@ -1,10 +1,11 @@
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-import AppBar from '../components/index/AppBar';
-import Grid from '@material-ui/core/Grid';
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
+import AppBar from '../components/index/AppBar'
+import Grid from '@material-ui/core/Grid'
 import Link from 'next/link'
-import Button from '@material-ui/core/Button';
-import { useUser } from '@auth0/nextjs-auth0';
+import Button from '@material-ui/core/Button'
+import { useUser } from '@auth0/nextjs-auth0'
+import AulasForm from '../components/editor/AulasForm'
 
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
     { name: 'Mongodb', img: '/mongodb.svg'},
     { name: 'JavaScript', img: '/js.svg'}, 
   ]
+
 
   const { user, error, isLoading } = useUser()
 

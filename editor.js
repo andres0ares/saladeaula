@@ -104,6 +104,13 @@ export default function Editor({turmas}) {
         setTurma(newTurma)
     }
 
+    if(!turmas) {
+        return (
+            <>
+                <p>Você não possui Permissão</p>
+            </>
+        )
+    }
     
     return (
         <>
@@ -171,12 +178,6 @@ Editor.getInitialProps = async (context) => {
 
 /*
 
-    if(!turmas) {
-        return (
-            <>
-                <p>Você não possui Permissão</p>
-            </>
-        )
-    }
+    
 
 */

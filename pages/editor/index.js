@@ -6,9 +6,10 @@ import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel'
+import FormControl from '@material-ui/core/FormControl'
 import List from '@material-ui/core/List'
+import { useUser, withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
 import base_URL from '../../utils/variables'
 import AulasForm from '../../components/editor/AulasForm'
@@ -26,6 +27,7 @@ export default function Editor({turmas}) {
 
 
     const classes = useStyles()
+    
 
     const [ edTurmas, setEdTurmas ] = useState(false)
     const [ edAulas, setEdAulas ] = useState(false)
@@ -50,7 +52,7 @@ export default function Editor({turmas}) {
     const handleNewAula = async (newAula) => {
         
         const url = `/api/aulas/${turma}`
-
+        console.log(newAula)
         const res = await fetch(
             url,
             {
@@ -64,6 +66,7 @@ export default function Editor({turmas}) {
             
         const result = await res.json()
         if(result.success) {
+            console.log(result.data)
             setDados(result.data)
         }
             
@@ -90,7 +93,7 @@ export default function Editor({turmas}) {
 
     }
 
-    const [dados, setDados ] = useState([{}])
+    const [dados, setDados ] = useState(turmas[0])
     const [turma, setTurma ] = useState('')
 
     const handleTurma = (event) => {
@@ -100,9 +103,14 @@ export default function Editor({turmas}) {
         setTurma(newTurma)
     }
 
+    if(!turmas) {
+        return (
+            <>
+                <p>Você não possui Permissão</p>
+            </>
+        )
+    }
     
-    
-
     return (
         <>
             <NavBar />
@@ -151,8 +159,24 @@ export default function Editor({turmas}) {
     )
 }
 
-Editor.getInitialProps = async () => {
-    const response = await fetch(base_URL + '/api/turmas')
-    const turmass = await response.json()
-    return { turmas: turmass.data }
+Editor.getInitialProps = async (context) => {
+
+    const session = await getSession(context.req, context.res)
+
+    if(session){
+        if(session.user.email == 'andreiarley@gmail.com') {
+            const response = await fetch(base_URL + '/api/turmas')
+            const turmass = await response.json()
+            return { turmas: turmass.data }
+        }
+    }
+    
+    return { turmas: false } 
+      
 }
+
+/*
+
+    
+
+*/

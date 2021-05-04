@@ -74,9 +74,6 @@ export default function AulasForm(props) {
     }
     
     const prepareAndSend = () => {
-        const test = newAula
-        console.log(test)
-        console.log(newAula)
         if(checked) {
             setNewAula((preValue) => ({
                 ...preValue,
